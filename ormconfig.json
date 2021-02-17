@@ -1,0 +1,17 @@
+
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "docker",
+  "database": "bd-educ",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/models/*.ts"],
+  "migrations": ["src/shared/infra/typeorm/migrations/*.ts"],
+  "cli": {
+    "entitiesDir": "src/models",
+    "migrationsDir": "src/shared/infra/typeorm/migrations/"
+  }
+}
