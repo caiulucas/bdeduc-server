@@ -4,7 +4,9 @@
   "synchronize": true,
   "logging": false,
   "entities": ["src/models/*.ts"],
+  "migrations": ["src/migrations/*.ts"],
   "cli": {
-    "entitiesDir": "src/models"
+    "entitiesDir": "src/models",
+    "migrationsDir": "src/migrations/"
   }
 }
