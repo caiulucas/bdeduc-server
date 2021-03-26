@@ -6,7 +6,7 @@ export default class TablesController {
     const manager = getManager();
     const sql = `SELECT table_name
                 FROM information_schema.tables
-                WHERE table_schema = 'public' 
+                WHERE table_schema = 'public' AND table_name != 'quests'
                 ORDER BY table_name;`;
 
     const tables = await manager.query(sql);

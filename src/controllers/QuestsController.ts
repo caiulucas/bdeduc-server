@@ -24,11 +24,12 @@ export default class QuestController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     const { title, content, level } = request.body;
+    const now = new Date();
 
     const manager = getManager();
 
-    const sql = `INSERT INTO quests (title, content, level) 
-                  values ('${title}', '${content}', '${level}')`;
+    const sql = `INSERT INTO quests (title, content, level, created_at, updated_at) 
+                values ('${title}', '${content}', '${level}', '${now.toLocaleString()}', '${now.toLocaleString()}')`;
 
     await manager.query(sql);
     return response.status(200).send();
