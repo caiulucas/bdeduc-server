@@ -1,14 +1,14 @@
+import dotenv from 'dotenv';
 import { createConnection } from 'typeorm';
 import express from 'express';
 import cors from 'cors';
 
 import routes from './routes/routes';
 
-async function connection() {
-  await createConnection();
-}
+dotenv.config();
 
-connection();
+createConnection();
+
 const app = express();
 
 app.use(cors());
