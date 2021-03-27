@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
-import { getManager } from 'typeorm';
+import knex from '../database';
 
 export default class QuestAwnserController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { sql, editable } = request.body;
-    const manager = getManager();
-
     const isSelect = sql.split(' ')[0];
 
     if (!editable && isSelect.toLowerCase() !== 'select') {
@@ -15,8 +13,8 @@ export default class QuestAwnserController {
     }
 
     try {
-      const result = await manager.query(sql);
-      console.log(result);
+      const result = await knex.raw(sql);
+      console.log(result.rows);
 
       return response.json(result);
     } catch (err) {

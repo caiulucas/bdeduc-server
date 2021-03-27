@@ -1,21 +1,21 @@
 import { Request, Response } from 'express';
-import { getManager } from 'typeorm';
+import knex from '../database';
 
 export default class ColumnsController {
   public async list(request: Request, response: Response): Promise<Response> {
     const { table } = request.query;
-    const manager = getManager();
 
-    const sql = `SELECT attrelid::regclass AS tbl
+    const columns = await knex.raw(
+      `SELECT attrelid::regclass AS tbl
                 , attname            AS col
                 , atttypid::regtype  AS datatype    
                 FROM   pg_attribute
-                WHERE  attrelid = '${table}'::regclass
+                WHERE  attrelid = ?::regclass
                 AND    attnum > 0
-                AND    NOT attisdropped;`;
+                AND    NOT attisdropped;`,
+      [`${table}`],
+    );
 
-    const columns = await manager.query(sql);
-
-    return response.json(columns);
+    return response.json(columns.rows);
   }
 }
