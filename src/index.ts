@@ -1,13 +1,10 @@
 import dotenv from 'dotenv';
-import { createConnection } from 'typeorm';
 import express from 'express';
 import cors from 'cors';
 
 import routes from './routes/routes';
 
 dotenv.config();
-
-createConnection();
 
 const app = express();
 
