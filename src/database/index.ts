@@ -1,4 +1,10 @@
-import knex from 'knex';
-import knexfile from '../../knexfile';
+import dotenv from 'dotenv';
+import pg from 'pg';
 
-export default knex(knexfile);
+dotenv.config();
+
+console.log(process.env.DATABASE_URL);
+
+const db = new pg.Client(process.env.DATABASE_URL);
+
+export default db;

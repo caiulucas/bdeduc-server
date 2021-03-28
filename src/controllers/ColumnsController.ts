@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import knex from '../database';
+import db from '../database';
 
 export default class ColumnsController {
   public async list(request: Request, response: Response): Promise<Response> {
     const { table } = request.query;
 
-    const columns = await knex.raw(
+    const columns = await db.query(
       `SELECT attrelid::regclass AS tbl
                 , attname            AS col
                 , atttypid::regtype  AS datatype    

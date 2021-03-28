@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import knex from '../database';
+import db from '../database';
 
 export default class QuestAwnserController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -13,10 +13,9 @@ export default class QuestAwnserController {
     }
 
     try {
-      const result = await knex.raw(sql);
-      console.log(result.rows);
+      const result = await db.query(sql);
 
-      return response.json(result);
+      return response.json(result.rows);
     } catch (err) {
       return response
         .status(400)
