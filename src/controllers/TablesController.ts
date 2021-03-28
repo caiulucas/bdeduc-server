@@ -3,6 +3,7 @@ import db from '../database';
 
 export default class TablesController {
   public async list(request: Request, response: Response): Promise<Response> {
+    console.log('Potato');
     const tables = await db.query(
       `SELECT table_name
                 FROM information_schema.tables
